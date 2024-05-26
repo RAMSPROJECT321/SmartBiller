@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5QNBHG4423"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-5QNBHG4423');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login/Signup Page</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Smart_Biller</title>
+    <link rel="stylesheet" href="indexStyle.css">
+    <script src="https://www.gstatic.com/firebasejs/9.8.4/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.8.4/firebase-auth-compat.js"></script>
 </head>
 <body>
     <div class="container">
@@ -13,30 +25,29 @@
         </div>
         <div class="login-form">
             <h2>Login</h2>
-            <form id="loginForm" onsubmit="return validateForm()">
+            <!-- <form id="loginForm"> -->
                 <div class="form-group">
-                    <label for="username" >Username:</label>
-                    <input type="text" id="username" name="username" placeholder="Enter Username" required>
+                    <label for="empId">Employee ID:</label>
+                    <input type="text" id="empId" name="empId" placeholder="Enter Emp. Id." required>
                 </div>
                 <div class="form-group">
                     <label for="password">Password:</label>
                     <input type="password" id="password" name="password"  placeholder="Enter Password" required>
+                    <div class="signup-link_01">
+                        <p><a href="forgotPassword.html"><u>Forgot Password</u></a></p>
+                    </div>
                 </div>
                 <div class="class_01">
-                <div class="class_02">
-                    <button type="submit">Login</button>
+                    <button id="submit">Login</button>
                 </div>
-                <div class="signup-link_01">
-                    <p><a href="dashboard.html"><u>Forgot Password</u></a></p>
-                </div>
-                </div>
-            </form>
+            <!-- </form> -->
         
         <div class="signup-link">
             <p>Don't have an account? <a href="SignUp.html">Sign up</a></p>
         </div>
     </div>
     </div>
-    <script src="script.js"></script>
+    <!-- <script src="script.js"></script> -->
+    <script type="module" src="index.js"></script>
 </body>
 </html>

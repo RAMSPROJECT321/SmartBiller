@@ -1,106 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5QNBHG4423"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5QNBHG4423');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup Page</title>
-    <link rel="stylesheet" href="style1.css">
+    <title>Smart_Biller</title>
+    <link rel="stylesheet" href="signUpStyle.css">
+    <script src="https://www.gstatic.com/firebasejs/9.8.4/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.8.4/firebase-auth-compat.js"></script>
 </head>
 <body>
-    <div class="project-title">
-        <h1 style="font-size: 40px; color:blue " >SMART BILLER</h1>
-    </div>
     <div class="container">
-        <div class="signup-form">
-            <h2 style="color: blue;"><u>Sign Up</u></h2>
-            <form id="signupForm" onsubmit="return validateForm()">
+        <div class="project-title">
+            <h1 class="heading_01">SMART BILLER</h1>
+        </div>
+            <div class="login-form">
+                <h2>Sign Up</h2>
                 <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
+                <label for="name" >Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter name" required>
                 </div>
                 <div class="form-group">
                     <label for="empId">Employee ID:</label>
-                    <input type="text" id="empId" name="empId" required>
+                    <input type="text" id="empId" name="empId" placeholder="Enter Emp. Id." required>
                 </div>
                 <div class="form-group">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" required>
+                    <label for="email" >email:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter email" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required>
+                    <input type="password" id="password" name="password"  placeholder="Enter Password" required>
                 </div>
-                <div class="form-group">
-                    <label for="age">Age:</label>
-                    <input type="number" id="age" name="age" required>
-                </div>
-                <div class="form-group">
-                    <label for="gender">Gender:</label>
-                    <select id="gender" name="gender" required>
-                        <option value="">Select</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
+                
                 <div class="form-group">
                     <label for="phoneNo">Phone Number:</label>
-                    <input type="text" id="phoneNo" name="phoneNo" required>
+                    <input type="text" id="phoneNo" name="phoneNo" placeholder="Enter PhoneNo." required>
                 </div>
-            <div class="pad_02">
-            <div class="pad_01">
-                <button onclick="Back_Button()">Back</button>
+                <div class="class_01">
+                    <button onclick="Back_Button()">Back</button>
+                    <button id="submit">Sign Up</button>
+                    <!-- <input type="submit" value="submit" class="sub" id="submit"> -->
+                </div>
             </div>
-            <div class="pad_01">
-                <button type="submit">Sign Up</button>
-            </div>
-            </div>
-            </form>
-        </div>
     </div>
-    <script src="script1.js"></script>
+    <!-- <script src="script.js"></script> -->
     <script>
         function Back_Button(){
             window.location.href = "index.html";
         }
-        function validateForm() {
-            // Add your validation logic here
-            // For example, you can check if the fields are not empty
-
-            // Assuming all fields are required, you can add validation for each field
-            var name = document.getElementById("name").value;
-            var empId = document.getElementById("empId").value;
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
-            var age = document.getElementById("age").value;
-            var gender = document.getElementById("gender").value;
-            var email = document.getElementById("email").value;
-            var phoneNo = document.getElementById("phoneNo").value;
-
-            // You can add more specific validation if needed
-
-            // Example: Checking if age is a number and between a certain range
-            if (isNaN(age) || age < 18 || age > 100) {
-                alert("Please enter a valid age between 18 and 100.");
-                return false;
-            }
-
-            // Example: Checking if email format is valid
-            var emailRegex = /^\S+@\S+\.\S+$/;
-            if (!emailRegex.test(email)) {
-                alert("Please enter a valid email address.");
-                return false;
-            }
-
-            // Add more validation logic as needed
-
-            // If all validations pass, return true to submit the form
-            return true;
-        }
     </script>
+    <!-- <script src="main.js"></script> -->
+    <script type="module" src="signUpScript.js"></script>
 </body>
 </html>
