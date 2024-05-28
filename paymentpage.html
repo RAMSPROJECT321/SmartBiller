@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <style>
+        /* General styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #c7d0f0;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 70%;
+            position: relative;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #333;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: inline-block;
+            width: 150px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 1em;
+            width: 200px; /* Fixed width for consistency */
+        }
+
+        input[type="text"][readonly] {
+            background-color: #f0f0f0;
+        }
+
+        /* Date and Time */
+        .date-time {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.2em;
+            color: #333;
+            border: 3px solid #f0f0f0;
+            border-radius: 10px;
+            padding: 5px;
+            animation: fadeInOut 1s infinite alternate;
+            transition: color 0.3s ease;
+        }
+
+        /* Student Profile */
+        .student-profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .student-profile img {
+            border-radius: 10px;
+            margin-right: 20px;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+
+        .student-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .student-info div {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .student-info label {
+            width: auto;
+            margin-right: 10px;
+            display: inline-block;
+        }
+
+        .student-info input {
+            width: 200px; /* Fixed width for both input fields */
+            display: inline-block;
+            padding: 8px; /* Optional: Ensure consistent padding */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        /* Centering the Balance Section */
+        .balance-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .balance-section div {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        /* Buttons */
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .buttons button {
+            padding: 10px 20px;
+            font-size: 1em;
+            color: white;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none; /* Remove underline */
+            display: inline-block;
+        }
+
+        .buttons button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body background="https://jooinn.com/images/blur-restaurant-3.png">
+    <div class="container">
+        <h1>PAYMENT</h1>
+        <!-- Student Profile -->
+        <div class="student-profile">
+            <img src="path/to/student-photo.jpg" alt="Student Photo" id="student-photo">
+            <div class="student-info">
+                <div>
+                    <label for="student-id">Student ID:</label>
+                    <input type="text" id="student-id" name="student-id" readonly value="12345">
+                </div>
+                <div>
+                    <label for="student-name">Student Name:</label>
+                    <input type="text" id="student-name" name="student-name" readonly value="John Doe">
+                </div>
+            </div>
+        </div>
+
+        <!-- Date and Time -->
+        <div class="date-time" id="date-time"></div>
+
+        <!-- Total Price, Remaining Balance, and Current Balance -->
+        <div class="balance-section section">
+            <div>
+                <label for="total-price">Total Price:</label>
+                <input type="text" id="total-price" name="total-price" readonly value="5000">
+            </div>
+            <div>
+                <label for="remaining-balance">Remaining Balance:</label>
+                <input type="text" id="remaining-balance" name="remaining-balance" readonly value="2000">
+            </div>
+            <div>
+                <label for="current-balance">Current Balance:</label>
+                <input type="text" id="current-balance" name="current-balance" readonly value="3000">
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="buttons">
+            <button onclick="window.location.href='billingpage.html'">Previous</button>
+            <button onclick="window.location.href='done-page-url'">Done</button>
+        </div>
+
+        <!-- JavaScript for live date and time -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // JavaScript code for handling live date and time
+                function updateDateTime() {
+                    const now = new Date();
+                    const date = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+                    const time = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
+                    document.getElementById('date-time').textContent = `${date} - ${time}`;
+                }
+
+                setInterval(updateDateTime, 1000); // Update every second
+                updateDateTime(); // Initial call to display immediately
+            });
+        </script>
+    </div>
+</body>
+
+</html>
