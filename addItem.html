@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Food Page</title>
     <link rel="stylesheet" href="addItemStyle.css">
+    <style>
+        .selected {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -31,8 +36,8 @@
                             <input type="number" id="itemRate" name="itemRate" required>
                         </div>
                         <button type="button" id="addItem1">Add Item</button>
-                        <button type="button" onclick="updateItem()">Update</button>
-                        <button type="button" onclick="deleteItem()">Delete</button>
+                        <button type="button" id="updateItem1">Update</button>
+                        <button type="button" id="deleteItem1">Delete</button>
                     </form>
                 </div>
             </div>
@@ -56,7 +61,7 @@
     </div>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-        import { getDatabase, ref, child, get, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+        import { getDatabase, ref, child, get, set, update, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDydurEKNLQIYsgenH29sWXJEgKCvdY-js",
@@ -73,10 +78,13 @@
         const db = getDatabase(app);
 
         let currentMealType = 'Breakfast'; // Default meal type
+        let selectedItemName = null;
 
         const itemName = document.getElementById('itemName');
         const rate = document.getElementById('itemRate');
         const btn1 = document.getElementById('addItem1');
+        const btn2 = document.getElementById('deleteItem1');
+        const btn3 = document.getElementById('updateItem1');
 
         function loadData(mealType) {
             const dbRef = ref(db);
@@ -98,6 +106,7 @@
 
                             row.appendChild(itemNameCell);
                             row.appendChild(rateCell);
+                            row.addEventListener('click', () => selectRow(row, item.ItemName, item.Rate));
                             itemsTableBody.appendChild(row);
                         }
                     }
@@ -119,10 +128,64 @@
             .then(() => {
                 alert("Data Added");
                 loadData(currentMealType); // Refresh the data after adding a new item
+                itemName.value = ''; // Clear the input fields
+                rate.value = '';
             })
             .catch((error) => {
                 console.error("Error adding document: ", error);
             });
+        }
+
+        function deleteItem() {
+            if (selectedItemName) {
+                remove(ref(db, currentMealType + '/' + selectedItemName))
+                .then(() => {
+                    alert("Data Deleted");
+                    loadData(currentMealType); // Refresh the data after deleting the item
+                    selectedItemName = null; // Reset the selected item name
+                    itemName.value = ''; // Clear the input fields
+                    rate.value = '';
+                })
+                .catch((error) => {
+                    console.error("Error deleting document: ", error);
+                });
+            } else {
+                alert("No item selected for deletion");
+            }
+        }
+
+        function updateItem() {
+            if (selectedItemName) {
+                update(ref(db, currentMealType + '/' + selectedItemName), {
+                    ItemName: itemName.value,
+                    Rate: rate.value
+                })
+                .then(() => {
+                    alert("Data Updated");
+                    loadData(currentMealType); // Refresh the data after updating the item
+                    selectedItemName = null; // Reset the selected item name
+                    itemName.value = ''; // Clear the input fields
+                    rate.value = '';
+                })
+                .catch((error) => {
+                    console.error("Error updating document: ", error);
+                });
+            } else {
+                alert("No item selected for update");
+            }
+        }
+
+        function selectRow(row, itemNameValue, itemRateValue) {
+            const previouslySelected = document.querySelector('.selected');
+            if (previouslySelected) {
+                previouslySelected.classList.remove('selected');
+            }
+            row.classList.add('selected');
+            selectedItemName = itemNameValue;
+
+            // Populate the input fields with the selected item's data
+            itemName.value = itemNameValue;
+            rate.value = itemRateValue;
         }
 
         function handleMealTypeChange(event) {
@@ -131,6 +194,8 @@
         }
 
         btn1.addEventListener('click', addItem);
+        btn2.addEventListener('click', deleteItem);
+        btn3.addEventListener('click', updateItem);
 
         // Add event listeners to radio buttons
         document.querySelectorAll('input[name="meal"]').forEach((radio) => {
