@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile Page</title>
+    <link rel="stylesheet" href="student.css">
+    <style>
+        .selected {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Student Profile</h1>
+        <hr>
+        <div class="container2">
+            <div class="left">
+                <div class="add-item">
+                    <h2>Add Student</h2>
+                    <form id="studentForm">
+                        <div class="form-group">
+                            <label for="studentName">Student Name:</label>
+                            <input type="text" id="studentName" name="studentName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="studentId">Student Id:</label>
+                            <input type="number" id="studentId" name="studentId" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="course">Course:</label>
+                            <input type="text" id="course" name="course" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="balance">Balance:</label>
+                            <input type="number" id="balance" name="balance" required>
+                        </div>
+                        <button type="button" id="addStudent">Add Student</button>
+                        <button type="button" id="updateStudent">Update</button>
+                        <button type="button" id="deleteStudent">Delete</button>
+                        <button type="button" id="clearFormButton">Clear</button>
+                    </form>
+                </div>
+            </div>
+            <div class="vertical-line"></div>
+            <div class="right">
+                <div id="studentsList">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Student Id</th>
+                                <th>Course</th>
+                                <th>Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentsTableBody">
+                            <!-- Added students will be displayed here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getDatabase, ref, get, set, update, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDydurEKNLQIYsgenH29sWXJEgKCvdY-js",
+            authDomain: "ramsproject321-75e29.firebaseapp.com",
+            databaseURL: "https://ramsproject321-75e29-default-rtdb.firebaseio.com",
+            projectId: "ramsproject321-75e29",
+            storageBucket: "ramsproject321-75e29.appspot.com",
+            messagingSenderId: "400972635097",
+            appId: "1:400972635097:web:8d98ea2531849aabfd17c8",
+            measurementId: "G-WDY9Y6BL30"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        let selectedStudentId = null;
+
+        const studentName = document.getElementById('studentName');
+        const studentId = document.getElementById('studentId');
+        const course = document.getElementById('course');
+        const balance = document.getElementById('balance');
+        const btnAdd = document.getElementById('addStudent');
+        const btnUpdate = document.getElementById('updateStudent');
+        const btnDelete = document.getElementById('deleteStudent');
+        const btnClear = document.getElementById('clearFormButton');
+
+        function loadStudents() {
+            const dbRef = ref(db, 'Student');
+            get(dbRef).then((snapshot) => {
+                if (snapshot.exists()) {
+                    const students = snapshot.val();
+                    const studentsTableBody = document.getElementById('studentsTableBody');
+                    studentsTableBody.innerHTML = ''; // Clear the table body
+
+                    for (const key in students) {
+                        if (students.hasOwnProperty(key)) {
+                            const student = students[key];
+                            const row = document.createElement('tr');
+                            const studentNameCell = document.createElement('td');
+                            const studentIdCell = document.createElement('td');
+                            const courseCell = document.createElement('td');
+                            const balanceCell = document.createElement('td');
+
+                            studentNameCell.textContent = student.StudentName;
+                            studentIdCell.textContent = student.StudentId;
+                            courseCell.textContent = student.Course;
+                            balanceCell.textContent = student.Balance;
+
+                            row.appendChild(studentNameCell);
+                            row.appendChild(studentIdCell);
+                            row.appendChild(courseCell);
+                            row.appendChild(balanceCell);
+                            row.addEventListener('click', () => selectRow(row, student));
+
+                            studentsTableBody.appendChild(row);
+                        }
+                    }
+                } else {
+                    console.log("No data available");
+                    const studentsTableBody = document.getElementById('studentsTableBody');
+                    studentsTableBody.innerHTML = '<tr><td colspan="4">No data available</td></tr>';
+                }
+            }).catch((error) => {
+                console.error("Error retrieving data: ", error);
+            });
+        }
+
+        function addStudent() {
+            if (studentName.value.trim() === '' || studentId.value.trim() === '' || course.value.trim() === '' || balance.value.trim() === '') {
+                alert("All fields are required.");
+                return;
+            }
+
+            const studentIdValue = studentId.value;
+            const dbRef = ref(db, 'Student/' + studentIdValue);
+
+            get(dbRef).then((snapshot) => {
+                if (snapshot.exists()) {
+                    alert("Student with this ID already exists");
+                } else {
+                    set(dbRef, {
+                        StudentName: studentName.value,
+                        StudentId: studentIdValue,
+                        Course: course.value,
+                        Balance: balance.value
+                    })
+                    .then(() => {
+                        alert("Student Added");
+                        loadStudents(); // Refresh the data after adding a new student
+                        clearForm(); // Clear the input fields
+                    })
+                    .catch((error) => {
+                        console.error("Error adding student: ", error);
+                    });
+                }
+            }).catch((error) => {
+                console.error("Error checking student ID: ", error);
+            });
+        }
+
+        function deleteStudent() {
+            if (selectedStudentId) {
+                remove(ref(db, 'Student/' + selectedStudentId))
+                .then(() => {
+                    alert("Student Deleted");
+                    loadStudents(); // Refresh the data after deleting the student
+                    selectedStudentId = null; // Reset the selected student ID
+                    clearForm(); // Clear the input fields
+                    studentId.removeAttribute('readonly'); // Make student ID editable again
+                })
+                .catch((error) => {
+                    console.error("Error deleting student: ", error);
+                });
+            } else {
+                alert("No student selected for deletion");
+            }
+        }
+
+        function updateStudent() {
+            if (studentName.value.trim() === '' || studentId.value.trim() === '' || course.value.trim() === '' || balance.value.trim() === '') {
+                alert("All fields are required.");
+                return;
+            }
+
+            if (selectedStudentId) {
+                update(ref(db, 'Student/' + selectedStudentId), {
+                    StudentName: studentName.value,
+                    Course: course.value,
+                    Balance: balance.value
+                })
+                .then(() => {
+                    alert("Student Updated");
+                    loadStudents(); // Refresh the data after updating the student
+                    selectedStudentId = null; // Reset the selected student ID
+                    clearForm(); // Clear the input fields
+                    studentId.removeAttribute('readonly'); // Make student ID editable again
+                })
+                .catch((error) => {
+                    console.error("Error updating student: ", error);
+                });
+            } else {
+                alert("No student selected for update");
+            }
+        }
+
+        function selectRow(row, student) {
+            const previouslySelected = document.querySelector('.selected');
+            if (previouslySelected) {
+                previouslySelected.classList.remove('selected');
+            }
+            row.classList.add('selected');
+            selectedStudentId = student.StudentId;
+
+            // Populate the input fields with the selected student's data
+            studentName.value = student.StudentName;
+            studentId.value = student.StudentId;
+            course.value = student.Course;
+            balance.value = student.Balance;
+
+            // Make the student ID field read-only
+            studentId.setAttribute('readonly', true);
+        }
+
+        function clearForm() {
+            studentName.value = '';
+            studentId.value = '';
+            course.value = '';
+            balance.value = '';
+            studentId.removeAttribute('readonly'); // Make student ID editable again
+        }
+
+        btnAdd.addEventListener('click', addStudent);
+        btnDelete.addEventListener('click', deleteStudent);
+        btnUpdate.addEventListener('click', updateStudent);
+        btnClear.addEventListener('click', clearForm);
+
+        // Load student data when the page loads
+        window.onload = () => {
+            loadStudents();
+        };
+    </script>
+</body>
+</html>
