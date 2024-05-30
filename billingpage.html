@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -81,10 +80,6 @@
             background-color: greenyellow;
         }
 
-        .radio-buttons:focus {
-            background-color: rgba(0, 0, 255, 0.6);
-        }
-
         .radio-buttons label:hover {
             background-color: rgba(0, 0, 255, 0.6);
         }
@@ -103,9 +98,6 @@
         .food-list table {
             width: 100%;
             border-collapse: collapse;
-            border-color: black;
-            max-height: 200px;
-            overflow-y: auto;
         }
 
         .food-list th,
@@ -157,9 +149,6 @@
         .buttons {
             display: flex;
             justify-content: space-between;
-            position: absolute;
-            bottom: 20px;
-            width: calc(100% - 80px);
         }
 
         #prev-button,
@@ -188,12 +177,6 @@
         button a {
             text-decoration: none;
             color: #fff;
-        }
-
-        #next-button {
-            position: absolute;
-            right: 40px;
-            bottom: 50px;
         }
     </style>
 </head>
@@ -227,7 +210,7 @@
 
             <!-- Food Lists -->
             <div class="food-list" id="breakfast-list">
-                <table style="border: black;">
+                <table>
                     <thead>
                         <tr>
                             <th>Food</th>
@@ -297,19 +280,19 @@
         <!-- Total Price and Remaining Balance -->
         <div class="section total-section">
             <label for="total-price">Total Price:</label>
-            <input type="text" id="total-price" name="total-price" readonly value="0">
+            <input type="text" id="total-price" name="total-price" readonly value="₹0.00">
         </div>
+
         <!-- Next and Previous Buttons -->
-        <div class="section" style="display: flex;" ,justify-content:space-between;>
+        <div class="section buttons">
             <button id="prev-button" onclick="window.location.href=''">Previous</button>
             <button id="next-button" onclick="window.location.href='paymentpage.html'">Next</button>
-
         </div>
 
         <!-- Firebase and JS Script -->
         <script type="module">
             import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-            import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+            import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
             const firebaseConfig = {
                 apiKey: "AIzaSyDydurEKNLQIYsgenH29sWXJEgKCvdY-js",
@@ -317,9 +300,8 @@
                 databaseURL: "https://ramsproject321-75e29-default-rtdb.firebaseio.com",
                 projectId: "ramsproject321-75e29",
                 storageBucket: "ramsproject321-75e29.appspot.com",
-                messagingSenderId: "400972635097",
-                appId: "1:400972635097:web:8d98ea2531849aabfd17c8",
-                measurementId: "G-WDY9Y6BL30"
+                messagingSenderId: "123456789",
+                appId: "1:123456789:web:abcdef123456"
             };
 
             const app = initializeApp(firebaseConfig);
@@ -335,13 +317,13 @@
                     foodLists.forEach(list => list.classList.remove('show'));
                     document.getElementById(`${selectedMeal}-list`).classList.add('show');
                     if (selectedMeal === 'breakfast') {
-                        fetchBreakfastItems();
+                        fetchItems('Breakfast', 'breakfast-items');
                     } else if (selectedMeal === 'lunch') {
-                        fetchLunchItems();
+                        fetchItems('Lunch', 'lunch-items');
                     } else if (selectedMeal === 'snacks') {
-                        fetchSnacksItems();
+                        fetchItems('Snacks', 'snacks-items');
                     } else if (selectedMeal === 'dinner') {
-                        fetchDinnerItems();
+                        fetchItems('Dinner', 'dinner-items');
                     }
                     calculateMealTotal(selectedMeal);
                 }
@@ -349,9 +331,13 @@
                 function handleQuantityChange(event) {
                     const quantity = parseInt(event.target.value) || 0;
                     const foodItem = event.target.closest('.food-item');
-                    const price = parseFloat(foodItem.querySelector('td:nth-child(2)').innerText.replace('₹', ''));
-                    const total = quantity * price;
-                    foodItem.querySelector('td:nth-child(4) span').innerText = total.toFixed(2); // Remove ₹ sign here
+                    const priceElement = foodItem.querySelector('td:nth-child(2)');
+                    const price = priceElement ? parseFloat(priceElement.innerText.replace('₹', '')) : 0;
+                    const totalElement = foodItem.querySelector('td:nth-child(4) span');
+                    if (totalElement) {
+                        const total = quantity * price;
+                        totalElement.innerText = total.toFixed(2);
+                    }
                     calculateMealTotal(foodItem.closest('.food-list').id.split('-')[0]);
                 }
 
@@ -359,7 +345,7 @@
                     let totalMealPrice = 0;
                     const totalPriceElements = document.querySelectorAll(`#${selectedMeal}-list .total-price`);
                     totalPriceElements.forEach(element => {
-                        totalMealPrice += parseFloat(element.innerText.replace('₹', ''));
+                        totalMealPrice += parseFloat(element.innerText.replace('₹', '') || 0);
                     });
                     totalPriceInput.value = `₹${totalMealPrice.toFixed(2)}`;
                 }
@@ -369,133 +355,65 @@
                 // Live Date and Time
                 function updateDateTime() {
                     const now = new Date();
-                    const date = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-                    const time = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
+                    const date = now.toLocaleDateString('en-US', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+                    const time = now.toLocaleTimeString('en-US', {
+                        hour: 'numeric',
+                        minute: 'numeric',
+                        second: 'numeric',
+                        hour12: true
+                    });
                     document.getElementById('date-time').textContent = `${date} - ${time}`;
                 }
 
                 setInterval(updateDateTime, 1000); // Update every second
                 updateDateTime(); // Initial call to display immediately
 
-                // Fetch Breakfast Items from Firebase
-                function fetchBreakfastItems() {
-                    const breakfastRef = ref(db, 'Breakfast');
-                    get(breakfastRef).then((snapshot) => {
-                        if (snapshot.exists()) {
-                            const breakfastItems = snapshot.val();
-                            const breakfastTableBody = document.getElementById('breakfast-items');
-                            breakfastTableBody.innerHTML = ''; // Clear existing rows
-                            for (const item in breakfastItems) {
-                                const foodItem = breakfastItems[item];
-                                const row = document.createElement('tr');
-                                row.classList.add('food-item');
-                                row.innerHTML = `
-                                    <td>${foodItem.name}</td>
-                                    <td>₹${foodItem.price}</td>
-                                    <td><input type="number" class="quantity" min="0" value="0"></td>
-                                    <td>₹<span class="total-price">0.00</span></td>
-                                `;
-                                row.querySelector('.quantity').addEventListener('input', handleQuantityChange);
-                                breakfastTableBody.appendChild(row);
+                // Fetch Items from Firebase
+                function fetchItems(mealType, tableBodyId) {
+                    const mealRef = ref(db, mealType);
+                    get(mealRef)
+                        .then((snapshot) => {
+                            if (snapshot.exists()) {
+                                const mealItems = snapshot.val();
+                                const tableBody = document.getElementById(tableBodyId);
+                                if (!tableBody) {
+                                    console.error('Table body element not found:', tableBodyId);
+                                    return;
+                                }
+                                tableBody.innerHTML = ''; // Clear existing rows
+                                for (const itemId in mealItems) {
+                                    const foodItem = mealItems[itemId];
+                                    if (!foodItem || typeof foodItem !== 'object' || !('ItemName' in foodItem) || !('Rate' in foodItem)) {
+                                        console.error('Invalid data format for food item:', foodItem);
+                                        continue; // Skip this item
+                                    }
+                                    const row = document.createElement('tr');
+                                    row.classList.add('food-item');
+                                    row.innerHTML = `
+                                        <td>${foodItem.ItemName}</td>
+                                        <td>₹${(foodItem.Rate ? parseFloat(foodItem.Rate).toFixed(2) : '0.00')}</td>
+                                        <td><input type="number" class="quantity" min="0" value="0"></td>
+                                        <td>₹<span class="total-price">0.00</span></td>
+                                    `;
+                                    row.querySelector('.quantity').addEventListener('input', handleQuantityChange);
+                                    tableBody.appendChild(row);
+                                }
+                            } else {
+                                console.log('No data available for', mealType);
                             }
-                        } else {
-                            console.log('No data available');
-                        }
-                    }).catch((error) => {
-                        console.error('Error fetching breakfast items:', error);
-                    });
+                        })
+                        .catch((error) => {
+                            console.error('Error fetching items:', error);
+                        });
                 }
-
-                // Fetch Lunch Items from Firebase
-                function fetchLunchItems() {
-                    const lunchRef = ref(db, 'Lunch');
-                    get(lunchRef).then((snapshot) => {
-                        if (snapshot.exists()) {
-                            const lunchItems = snapshot.val();
-                            const lunchTableBody = document.getElementById('lunch-items');
-                            lunchTableBody.innerHTML = ''; // Clear existing rows
-                            for (const item in lunchItems) {
-                                const foodItem = lunchItems[item];
-                                const row = document.createElement('tr');
-                                row.classList.add('food-item');
-                                row.innerHTML = `
-                                    <td>${foodItem.name}</td>
-                                    <td>₹${foodItem.price}</td>
-                                    <td><input type="number" class="quantity" min="0" value="0"></td>
-                                    <td>₹<span class="total-price">0.00</span></td>
-                                `;
-                                row.querySelector('.quantity').addEventListener('input', handleQuantityChange);
-                                lunchTableBody.appendChild(row);
-                            }
-                        } else {
-                            console.log('No data available');
-                        }
-                    }).catch((error) => {
-                        console.error('Error fetching lunch items:', error);
-                    });
-                }
-
-                // Fetch Snacks Items from Firebase
-                function fetchSnacksItems() {
-                    const snacksRef = ref(db, 'Snacks');
-                    get(snacksRef).then((snapshot) => {
-                        if (snapshot.exists()) {
-                            const snacksItems = snapshot.val();
-                            const snacksTableBody = document.getElementById('snacks-items');
-                            snacksTableBody.innerHTML = ''; // Clear existing rows
-                            for (const item in snacksItems) {
-                                const foodItem = snacksItems[item];
-                                const row = document.createElement('tr');
-                                row.classList.add('food-item');
-                                row.innerHTML = `
-                                    <td>${foodItem.name}</td>
-                                    <td>₹${foodItem.price}</td>
-                                    <td><input type="number" class="quantity" min="0" value="0"></td>
-                                    <td>₹<span class="total-price">0.00</span></td>
-                                `;
-                                row.querySelector('.quantity').addEventListener('input', handleQuantityChange);
-                                snacksTableBody.appendChild(row);
-                            }
-                        } else {
-                            console.log('No data available');
-                        }
-                    }).catch((error) => {
-                        console.error('Error fetching snacks items:', error);
-                    });
-                }
-
-                // Fetch Dinner Items from Firebase
-                function fetchDinnerItems() {
-                    const dinnerRef = ref(db, 'Dinner');
-                    get(dinnerRef).then((snapshot) => {
-                        if (snapshot.exists()) {
-                            const dinnerItems = snapshot.val();
-                            const dinnerTableBody = document.getElementById('dinner-items');
-                            dinnerTableBody.innerHTML = ''; // Clear existing rows
-                            for (const item in dinnerItems) {
-                                const foodItem = dinnerItems[item];
-                                const row = document.createElement('tr');
-                                row.classList.add('food-item');
-                                row.innerHTML = `
-                                    <td>${foodItem.name}</td>
-                                    <td>₹${foodItem.price}</td>
-                                    <td><input type="number" class="quantity" min="0" value="0"></td>
-                                    <td>₹<span class="total-price">0.00</span></td>
-                                `;
-                                row.querySelector('.quantity').addEventListener('input', handleQuantityChange);
-                                dinnerTableBody.appendChild(row);
-                            }
-                        } else {
-                            console.log('No data available');
-                        }
-                    }).catch((error) => {
-                        console.error('Error fetching dinner items:', error);
-                    });
-                }
-
+                
             });
         </script>
     </div>
 </body>
-
 </html>
