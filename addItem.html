@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Food Page</title>
-    <link rel="stylesheet" href="addItemStyle.css">
+    <link rel="stylesheet" href="css/addItem.css">
 </head>
 <body>
     <div class="container">
@@ -30,16 +30,16 @@
                             <label for="itemRate">Rate:</label>
                             <input type="number" id="itemRate" name="itemRate" required>
                         </div>
-                        <button type="button" id="addItem1">Add Item</button>
-                        <button type="button" onclick="updateItem()">Update</button>
-                        <button type="button" onclick="deleteItem()">Delete</button>
+                        <button type="button" id="addItemBtn">Add Item</button>
+                        <button type="button" id="updateItemBtn">Update Item</button>
+                        <button type="button" id="deleteItemBtn">Delete Item</button>
                     </form>
                 </div>
             </div>
             <div class="vertical-line"></div>
             <div class="right">
                 <div id="itemsList">
-                    <table>
+                    <table id="itemsTable">
                         <thead>
                             <tr>
                                 <th>Item Name</th>
@@ -54,93 +54,5 @@
             </div>
         </div>
     </div>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-        import { getDatabase, ref, child, get, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyDydurEKNLQIYsgenH29sWXJEgKCvdY-js",
-            authDomain: "ramsproject321-75e29.firebaseapp.com",
-            databaseURL: "https://ramsproject321-75e29-default-rtdb.firebaseio.com",
-            projectId: "ramsproject321-75e29",
-            storageBucket: "ramsproject321-75e29.appspot.com",
-            messagingSenderId: "400972635097",
-            appId: "1:400972635097:web:8d98ea2531849aabfd17c8",
-            measurementId: "G-WDY9Y6BL30"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
-
-        let currentMealType = 'Breakfast'; // Default meal type
-
-        const itemName = document.getElementById('itemName');
-        const rate = document.getElementById('itemRate');
-        const btn1 = document.getElementById('addItem1');
-
-        function loadData(mealType) {
-            const dbRef = ref(db);
-            get(child(dbRef, mealType)).then((snapshot) => {
-                if (snapshot.exists()) {
-                    const items = snapshot.val();
-                    const itemsTableBody = document.getElementById('itemsTableBody');
-                    itemsTableBody.innerHTML = ''; // Clear the table body
-
-                    for (const key in items) {
-                        if (items.hasOwnProperty(key)) {
-                            const item = items[key];
-                            const row = document.createElement('tr');
-                            const itemNameCell = document.createElement('td');
-                            const rateCell = document.createElement('td');
-
-                            itemNameCell.textContent = item.ItemName;
-                            rateCell.textContent = item.Rate;
-
-                            row.appendChild(itemNameCell);
-                            row.appendChild(rateCell);
-                            itemsTableBody.appendChild(row);
-                        }
-                    }
-                } else {
-                    console.log("No data available");
-                    const itemsTableBody = document.getElementById('itemsTableBody');
-                    itemsTableBody.innerHTML = '<tr><td colspan="2">No data available</td></tr>';
-                }
-            }).catch((error) => {
-                console.error("Error retrieving data: ", error);
-            });
-        }
-
-        function addItem() {
-            set(ref(db, currentMealType + '/' + itemName.value), {
-                ItemName: itemName.value,
-                Rate: rate.value
-            })
-            .then(() => {
-                alert("Data Added");
-                loadData(currentMealType); // Refresh the data after adding a new item
-            })
-            .catch((error) => {
-                console.error("Error adding document: ", error);
-            });
-        }
-
-        function handleMealTypeChange(event) {
-            currentMealType = event.target.value;
-            loadData(currentMealType);
-        }
-
-        btn1.addEventListener('click', addItem);
-
-        // Add event listeners to radio buttons
-        document.querySelectorAll('input[name="meal"]').forEach((radio) => {
-            radio.addEventListener('change', handleMealTypeChange);
-        });
-
-        // Load default data when the page loads
-        window.onload = () => {
-            loadData(currentMealType);
-        };
-    </script>
 </body>
 </html>

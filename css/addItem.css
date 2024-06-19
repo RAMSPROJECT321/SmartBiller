@@ -1,0 +1,162 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    /* display: flex; */
+    /* max-width: 100%; */
+    height: 500px;
+    margin: 5px 5px;
+    /* padding: 20px; */
+    /* background-color: #e7e7e7; */
+    /* background-color: #c7d0f0; */
+    background-color: #ebe9e3;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+.container2{
+    display: flex;
+}
+h1{
+    font-size: 40px;
+    padding: 0px;
+    margin:15px;
+    color: #000000;
+    text-align: center;
+}   
+
+.left, .right {
+    height: 60vh;
+    width: 50%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.vertical-line {
+    width: 1.5px;
+    background-color: #000000;
+    position: relative;
+    top:0vh;
+    /* bottom:5.5vh; */
+    /* left: 50%; */
+    transform: translateX(-50%);
+}
+
+.radio-buttons {
+    display: flex;
+    /* justify-content: space-between;s */
+    align-items: flex-start;
+    margin-bottom: 10px;
+    gap: 20px;
+}
+
+.radio-buttons label {
+    display: block;
+            flex: 0.1;
+            text-align: center;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-left: 15px;
+}
+.radio-buttons label:hover {
+    background-color: #cdcbcb;
+}
+/* .radio-buttons input {
+    margin-right: 5px;
+} */
+
+hr {
+    border: 0;
+    border-top: 1.5px solid #000000;
+    margin: 20px 0;
+    /* width: 2px; */
+    /* height: 2px; */
+}
+
+.add-item h2 {
+    margin-bottom: 10px;
+    margin: 0px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #0000ff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #151aaa;
+}
+
+#itemsList {
+    
+    /* height: 55%;     */
+    overflow-y: auto;
+    /* margin-top: 0; */
+}
+
+#itemsList table{
+    width: 100%;
+    /* max-height: 380px;      */
+    overflow-y: auto;
+    border-collapse: collapse;
+    
+}
+
+#itemsList table, #itemsList th, #itemsList td {
+    border: 1px solid #000000;
+}
+
+#itemsList th, #itemsList td {
+    padding: 10px;
+    text-align: left;
+}
+
+#itemsList thead {
+    background-color: #f2f2f2;
+    display: block;
+}
+
+#itemsList tbody {
+    display: block;
+    max-height:40vh; /* Adjust the height as needed */
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#itemsList tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+#itemsList thead tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
