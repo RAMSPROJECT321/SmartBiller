@@ -5,6 +5,18 @@ body {
     padding: 0;
 }
 
+/* .container {
+    display: flex;
+    max-width: 95%;
+    height: 100%;
+    margin: 5px 5px;
+    padding: 20px;
+    background-color: #e7e7e7;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+} */
+
 .container {
     /* display: flex; */
     /* max-width: 100%; */
@@ -16,7 +28,7 @@ body {
     /* background-color: #c7d0f0; */
     background-color: #ebe9e3;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    /* border-radius: 8px; */
+    border-radius: 8px;
     overflow: hidden;
 }
 .container2{
@@ -25,7 +37,7 @@ body {
 h1{
     font-size: 40px;
     padding: 0px;
-    margin:15px;
+    margin: 15px;
     color: #000000;
     text-align: center;
 }   
@@ -40,10 +52,10 @@ h1{
 .vertical-line {
     width: 1.5px;
     background-color: #000000;
-    position: relative;
-    top:0vh;
-    /* bottom:5.5vh; */
-    /* left: 50%; */
+    position: absolute;
+    top: 97px;
+    bottom: 18.3px;
+    left: 50%;
     transform: translateX(-50%);
 }
 
@@ -64,10 +76,10 @@ h1{
             border-radius: 10px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            margin-left: 15px;
+
 }
 .radio-buttons label:hover {
-    background-color: #cdcbcb;
+    background-color: #e0e0e0;
 }
 /* .radio-buttons input {
     margin-right: 5px;
@@ -127,49 +139,42 @@ button {
     background-color: #151aaa;
 } */
 
-#itemsList {
-    
-    /* height: 55%;     */
-    overflow-y: auto;
-    /* margin-top: 0; */
-}
-
-#itemsList table{
+table{
     width: 100%;
-    /* max-height: 380px;      */
+    /* height: 60vh;  */
     overflow-y: auto;
     border-collapse: collapse;
-    
+    /* border: 2px solid black; */
 }
 
-#itemsList table, #itemsList th, #itemsList td {
+table,  th, td {
     border: 1px solid #000000;
 }
 
-#itemsList th, #itemsList td {
+th,  td {
     padding: 10px;
     text-align: left;
 }
 
-#itemsList thead {
+thead {
     background-color: #f2f2f2;
     display: block;
 }
 
-#itemsList tbody {
+tbody {
     display: block;
-    max-height:40vh; /* Adjust the height as needed */
+    max-height:55vh; /* Adjust the height as needed */
     overflow-y: auto;
     overflow-x: hidden;
 }
 
-#itemsList tbody tr {
+tbody tr {
     display: table;
     width: 100%;
     table-layout: fixed;
 }
 
-#itemsList thead tr {
+thead tr {
     display: table;
     width: 100%;
     table-layout: fixed;

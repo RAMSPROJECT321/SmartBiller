@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5QNBHG4423"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5QNBHG4423');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart_Biller</title>
+    <link rel="stylesheet" href="css/signUp.css">
+    <script src="https://www.gstatic.com/firebasejs/9.8.4/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.8.4/firebase-auth-compat.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- <div class="project-title">
+            <h1 class="heading_01">SMART BILLER</h1>
+        </div> -->
+            <div class="login-form">
+                <h2 class="h2"> Sign Up</h2>
+                <div class="form-group">
+                <label for="name" >Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter name" required>
+                </div>
+                <div class="form-group">
+                    <label for="empId">Employee ID:</label>
+                    <input type="text" id="empId" name="empId" placeholder="Enter Emp. Id." required>
+                </div>
+                <div class="form-group">
+                    <label for="email" >email:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password"  placeholder="Enter Password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phoneNo">Phone Number:</label>
+                    <input type="text" id="phoneNo" name="phoneNo" placeholder="Enter PhoneNo." required>
+                </div>
+                <div class="class_01">
+                    <button class="button_02" onclick="loadPage('html/login.html')">Back</button>
+                    <button class="button_02" id="submit">Sign Up</button>
+                    <!-- <input type="submit" value="submit" class="sub" id="submit"> -->
+                </div>
+            </div>
+    </div>
+    <!-- <script src="script.js"></script> -->
+    <!-- <script>
+        function Back_Button(){
+            window.location.href = "html/login.html";
+        }
+    </script> -->
+    <!-- <script src="main.js"></script> -->
+    <script type="module" src="signUpScript.js"></script>
+</body>
+</html>

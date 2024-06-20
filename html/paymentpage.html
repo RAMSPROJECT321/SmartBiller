@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <link rel="stylesheet" href="css/payment.css">
+</head>
+
+<body background="https://jooinn.com/images/blur-restaurant-3.png">
+    <div class="container">
+        <h1 class="heading">PAYMENT</h1>
+        <!-- Student Profile -->
+        <div class="student-profile">
+            <img src="path/to/student-photo.jpg" alt="Student Photo" id="student-photo">
+            <div class="student-info">
+                <div>
+                    <label for="student-id">Student ID:</label>
+                    <input type="text" id="student-id" name="student-id" readonly value="12345">
+                </div>
+                <div>
+                    <label for="student-name">Student Name:</label>
+                    <input type="text" id="student-name" name="student-name" readonly value="John Doe">
+                </div>
+            </div>
+        </div>
+
+        <!-- Date and Time -->
+        <div class="date-time" id="date-time"></div>
+
+        <!-- Total Price, Remaining Balance, and Current Balance -->
+        <div class="balance-section section">
+            <div>
+                <label for="total-price">Total Price:</label>
+                <input type="text" id="total-price" name="total-price" readonly value="5000">
+            </div>
+            <div>
+                <label for="remaining-balance">Remaining Balance:</label>
+                <input type="text" id="remaining-balance" name="remaining-balance" readonly value="2000">
+            </div>
+            <div>
+                <label for="current-balance">Current Balance:</label>
+                <input type="text" id="current-balance" name="current-balance" readonly value="3000">
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="buttons">
+            <button onclick="loadPage('html/billingpage.html')">Previous</button>
+            <button onclick="loadPage('html/billingpage.html')">Done</button>
+        </div>
+
+        <!-- JavaScript for live date and time -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // JavaScript code for handling live date and time
+                function updateDateTime() {
+                    const now = new Date();
+                    const date = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+                    const time = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
+                    document.getElementById('date-time').textContent = `${date} - ${time}`;
+                }
+
+                setInterval(updateDateTime, 1000); // Update every second
+                updateDateTime(); // Initial call to display immediately
+            });
+        </script>
+    </div>
+</body>
+
+</html>

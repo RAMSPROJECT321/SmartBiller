@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing Page</title>
+    <link rel="stylesheet" href="css/billing.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>BILLING</h1>
+        <!-- Date and Time -->
+        <div class="date-time" id="date-time"></div>
+
+        <!-- Student Info -->
+        <div class="section" style="display: flex; justify-content: space-between;">
+            <div>
+                <label for="student-id">Student ID:</label>
+                <input type="text" id="student-id" name="student-id" placeholder="Enter Student ID">
+            </div>
+            <div>
+                <label for="student-name">Student Name:</label>
+                <input type="text" id="student-name" name="student-name" placeholder="Enter Student Name">
+            </div>
+        </div>
+
+        <!-- Radio Buttons for Meals -->
+        <div class="section">
+            <div class="radio-buttons">
+                <label><input type="radio" name="meal" value="breakfast" checked> Breakfast</label>
+                <label><input type="radio" name="meal" value="lunch"> Lunch</label>
+                <label><input type="radio" name="meal" value="snacks"> Snacks</label>
+                <label><input type="radio" name="meal" value="dinner"> Dinner</label>
+            </div>
+
+            <!-- Food Lists -->
+            <div class="food-list" id="breakfast-list">
+                <table style="border: black;">
+                    <thead>
+                        <tr>
+                            <th>Food</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="breakfast-items">
+                        <!-- Breakfast items will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Lunch Food List -->
+            <div class="food-list" id="lunch-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Food</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lunch-items">
+                        <!-- Lunch items will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Snacks Food List -->
+            <div class="food-list" id="snacks-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Food</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="snacks-items">
+                        <!-- Snacks items will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Dinner Food List -->
+            <div class="food-list" id="dinner-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Food</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dinner-items">
+                        <!-- Dinner items will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Total Price and Remaining Balance -->  
+        <div class="section total-section">
+            <label for="total-price">Total Price:</label>
+            <input type="text" id="total-price" name="total-price" readonly value="0">
+        </div>
+        <!-- Next and Previous Buttons -->
+        <div class="section_01">
+            <button id="prev-button" onclick="loadPage('html/payment.html')">Previous</button>
+            <button id="next-button" onclick="loadPage('html/paymentpage.html')">Next</button>
+        </div>
+    </div>
+</body>
+
+</html>

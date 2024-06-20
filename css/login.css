@@ -5,11 +5,13 @@ body {
     background-color: #e7e7e7;
 }
 
-.container {
-    display: flex;
+.container_01 {
+    margin-top: 50px;
+    /* display: flex; */
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    /* height: 85vh; */
+    /* width:95%; */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -28,14 +30,19 @@ body {
 }
 
 .login-form {
-    width: 30%;
+    /* width: 30%; */
     padding: 20px;
+    /* margin-bottom: 20px; */
     background-color: #c7d0f0;
-    color: #000000;
-    border-radius: 10px;
+    color: #000000; 
+    border-radius: 5px;
 }
 
 .form-group {
+    margin-bottom: 20px;
+}
+
+.login-form .h2{
     margin-bottom: 20px;
 }
 
@@ -51,18 +58,20 @@ body {
     border-radius: 5px;
 }
 
-button {
-    
+.button_01 {
     padding: 10px 20px;
-    background-color: rgba(0, 0, 255, 0.6);
+    background-color: rgba(0, 0, 255, 1);
     color: #000000;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 20px;
+    
 }
 
-button:hover {
-    background-color:green;
+
+.button_01:hover {
+    background-color:#151aaa;
 }
 
 .signup-link {
@@ -73,11 +82,12 @@ button:hover {
 .signup-link a {
     color: #0000FF;
     text-decoration: none;
+    cursor: pointer;
 }
 .signup-link_01 a {
     color: #0000FF;
     text-decoration: none;
-    
+    cursor: pointer;
 }
 
 .signup-link a:hover {
@@ -89,7 +99,7 @@ button:hover {
     padding-top: 0;
 }
 
-.class_01 button {
+.class_01 .button_01 {
     width: 100%;
     margin-top: 20px;
     height: 40px;   
@@ -111,3 +121,46 @@ button:hover {
 .signup-link_01 a:hover {
     color: #0000FF;
 }
+/* 
+nav{
+    height: 80px;
+    width: 100%;
+    background: #34495e;
+    border-bottom: 3px solid rgb(0, 0, 0);
+} */
+
+/* label.logo{
+    cursor: pointer;
+    font-size: 35px;
+    font-weight: bold;
+    color: white;
+    padding: 0 100px;
+    line-height: 80px;
+}
+
+nav ul{
+    float: right;
+    margin-right: 20px;
+
+}
+
+nav li{
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 5px;   
+    line-height:80px;
+}
+
+nav a{
+    color: white;
+    font-size: 18px;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+    padding: 7px 10px;
+    border-radius: 3px;
+}*/
+
+/* a:hover{
+    border: 1px solid white;
+    transition: .5s;
+}  */

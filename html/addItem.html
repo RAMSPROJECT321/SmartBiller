@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Food Page</title>
+    <link rel="stylesheet" href="css/addItem.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Food Menu</h1>
+        <hr>
+        <div class="radio-buttons">
+            <label><input type="radio" name="meal" value="Breakfast" id="breakfast" checked> Breakfast</label>
+            <label><input type="radio" name="meal" value="Lunch" id="lunch"> Lunch</label>
+            <label><input type="radio" name="meal" value="Snacks" id="snacks"> Snacks</label>
+            <label><input type="radio" name="meal" value="Dinner" id="dinner"> Dinner</label>
+        </div>
+        <hr>
+        <div class="container2">
+            <div class="left">
+                <div class="add-item">
+                    <h2>Add Item</h2>
+                    <form id="itemForm">
+                        <div class="form-group">
+                            <label for="itemName">Item Name:</label>
+                            <input type="text" id="itemName" name="itemName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemRate">Rate:</label>
+                            <input type="number" id="itemRate" name="itemRate" required>
+                        </div>
+                        <button class="button_01" type="button" id="addItemBtn">Add Item</button>
+                        <button class="button_01" type="button" id="updateItemBtn">Update Item</button>
+                        <button class="button_01" type="button" id="deleteItemBtn">Delete Item</button>
+                    </form>
+                </div>
+            </div>
+            <div class="vertical-line"></div>
+            <div class="right">
+                <div id="itemsList">
+                    <table id="itemsTable">
+                        <thead>
+                            <tr>
+                                <th>Item Name</th>
+                                <th>Rate</th>
+                            </tr>
+                        </thead>
+                        <tbody id="itemsTableBody">
+                            <!-- Added items will be displayed here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

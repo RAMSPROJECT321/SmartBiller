@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMART BILLER</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <nav>
+        <label class="logo">SMART BILLER</label>
+        <ul>
+            <li><a id="loginPage" class="nav iactive" onclick="loadPage('html/login.html')">login</a></li>
+            <li><a id="SignUpPage" class="nav" onclick="loadPage('html/SignUp.html')">SignUp</a></li>
+        </ul>
+    </nav>
+    <div class="index_container">
+        <div class="heading">
+            <h2>Streamline Your Food Service Billing</h2>
+            <h1><span id="autoType"></span></h1>
+        </div>
+        <div class="content_main_class">
+            <div id="index_content"></div>
+        </div>
+    </div>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script> <!-- for email CDN -->
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/index.js"></script>
+    
+
+    <!-- Only for autotyping effect by using CDN -->
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script>
+        var typed = new Typed('#autoType', {
+            strings: ['<i>Your one-stop billing solution.</i>', 'SMART BILLER'],
+            typeSpeed: 80,
+            backSpeed:10,
+            loop:true
+          });
+    </script>
+</body>
+</html>

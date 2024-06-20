@@ -1,0 +1,124 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #333;
+    color: #333; /* Set a default text color for readability */
+    -webkit-text-fill-color: white;
+}
+
+.container {
+    max-width: 1000px; /* Adjust as needed for responsiveness */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2, p {
+    margin: 0;
+}
+
+h1 {
+    font-size: 2.5em; /* Adjust heading sizes for hierarchy */
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+}
+
+p {
+    line-height: 1.5; /* Improve readability with line spacing */
+}
+
+/* Header styles */
+.header {
+    background-color: #333;
+    color: #fff; /* Light text for dark background */
+    padding: 15px 0;
+}
+
+.header h1 {
+    text-align: center;
+}
+
+.header p {
+    font-size: 1.2em;
+    text-align: center;
+}
+
+/* Animated Text Style */
+.animated-text {
+    display: inline-block;
+    animation: animateText 3s ease-in-out infinite;
+}
+
+@keyframes animateText {
+    0% {
+        color: #fff; /* Start with white */
+    }
+    50% {
+        color: #0095ff; /* Transition to blue */
+    }
+    100% {
+        color: #fff; /* Back to white */
+    }
+}
+
+/* Main section styles */
+.main {
+    padding-top: 10px; /* Add vertical spacing */
+    background-color: #333;
+}
+
+.about-us{
+    margin-bottom: 20px; /* Add spacing between sections */
+}
+
+.about-us ul,
+.benefits-list {
+    list-style: none;
+    padding: 0;
+}
+
+.about-us li,
+.benefits-list li {
+    margin-bottom: 15px;
+}
+
+.icon {
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+    margin-right: 10px;
+    color: #333; /* Consistent color with text */
+}
+
+.icon i {
+    font-size: 1.5em;
+}
+
+/* Benefits section styles */
+.benefits-list li {
+    line-height: 1.4; /* Improve readability within lists */
+}
+
+.benefits-list li i {
+    color: #0095ff; /* Accent color for checkmarks */
+    margin-right: 5px;
+}
+
+/* Footer styles */
+.footer {
+    background-color: #ffffff;
+    color: #000000;
+    -webkit-text-fill-color: black;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.footer p {
+    font-size: 0.8em;
+    margin-bottom: 0;
+}
