@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing Page</title>
+    <style>
+        /* General styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #c7d0f0;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 70%;
+            position: relative;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #333;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        input[type="text"][readonly] {
+            background-color: #f0f0f0;
+        }
+
+        .radio-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .radio-buttons label {
+            display: block;
+            flex: 1;
+            text-align: center;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="radio"]:checked+label {
+            background-color: greenyellow;
+        }
+
+        .radio-buttons label:hover {
+            background-color: rgba(0, 0, 255, 0.6);
+        }
+
+        .food-list {
+            display: none;
+            margin-top: 10px;
+            max-height: 25vh;
+            overflow-y: auto;
+        }
+
+        .food-list.show {
+            display: block;
+        }
+
+        .food-list table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .food-list th,
+        .food-list td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .food-list th {
+            background-color: #f0f0f0;
+        }
+
+        .total-section {
+            text-align: right;
+        }
+
+        .total-section label {
+            font-weight: bold;
+        }
+
+        .total-section input {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #333;
+            background-color: #f0f0f0;
+            border: none;
+            padding: 8px;
+            border-radius: 4px;
+            width: 100%;
+            text-align: right;
+        }
+
+        /* Date and Time */
+        .date-time {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.2em;
+            color: #333;
+            border: 3px solid #f0f0f0;
+            border-radius: 10px;
+            padding: 5px;
+            animation: fadeInOut 1s infinite alternate;
+            transition: color 0.3s ease;
+        }
+
+        /* Next and Previous Buttons */
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #prev-button,
+        #next-button {
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 255, 0.6);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        #prev-button:hover,
+        #next-button:hover {
+            background-color: #45a049;
+            transform: scale(1.1);
+        }
+
+        #prev-button:active,
+        #next-button:active {
+            background-color: #3e8e41;
+            transform: scale(0.9);
+        }
+
+        button a {
+            text-decoration: none;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body background="https://jooinn.com/images/blur-restaurant-3.png">
+    <div class="container">
+        <h1>BILLING</h1>
+        <!-- Date and Time -->
+        <div class="date-time" id="date-time"></div>
+
+        <!-- Student Info -->
+        <div class="section" style="display: flex; justify-content: space-between;">
+            <div>
+                <label for="student-id">Student ID:</label>
+                <input type="text" id="student-id" name="student-id" placeholder="Enter Student ID">
+            </div>
+            <div>
+                <label for="student-name">Student Name:</label>
+                <input type="text" id="student-name" name="student-name" placeholder="Enter Student Name">
+            </div>
+        </div>
+
+        <!-- Radio Buttons for Meals -->
+        <div class="section">
+            <div class="radio-buttons">
+                <label><input type="radio" name="meal" value="breakfast"> Breakfast</label>
+                <label><input type="radio" name="meal" value="lunch"> Lunch</label>
+                <label><input type="radio" name="meal" value="snacks"> Snacks</label>
+                <label><input type="radio" name="meal" value="dinner"> Dinner</label>
+            </div>
+
+            <!-- Food Lists -->
+            <div class="food-list" id="breakfast-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Food</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="breakfast-items">
+                        <!-- Breakfast items will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Lunch Food List -->
+            <div class="food-list" id="lunch-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Food</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lunch-items">
+                        <!-- Lunch items will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Snacks Food List -->
+            <div class="food-list" id="snacks-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Food</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="snacks-items">
+                        <!-- Snacks items will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Dinner Food List -->
+            <div class="food-list" id="dinner-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Food</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dinner-items">
+                        <!-- Dinner items will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Total Price and Remaining Balance -->
+        <div class="section total-section">
+            <label for="total-price">Total Price:</label>
+            <input type="text" id="total-price" name="total-price" readonly value="₹0.00">
+        </div>
+
+        <!-- Next and Previous Buttons -->
+        <div class="section buttons">
+            <button id="prev-button" onclick="window.location.href=''">Previous</button>
+            <button id="next-button" onclick="window.location.href='paymentpage.html'">Next</button>
+        </div>
+
+        <!-- Firebase and JS Script -->
+        <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+            import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+            const firebaseConfig = {
+                apiKey: "AIzaSyDydurEKNLQIYsgenH29sWXJEgKCvdY-js",
+                authDomain: "ramsproject321-75e29.firebaseapp.com",
+                databaseURL: "https://ramsproject321-75e29-default-rtdb.firebaseio.com",
+                projectId: "ramsproject321-75e29",
+                storageBucket: "ramsproject321-75e29.appspot.com",
+                messagingSenderId: "123456789",
+                appId: "1:123456789:web:abcdef123456"
+            };
+
+            const app = initializeApp(firebaseConfig);
+            const db = getDatabase(app);
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const mealRadios = document.querySelectorAll('input[name="meal"]');
+                const foodLists = document.querySelectorAll('.food-list');
+                const totalPriceInput = document.getElementById('total-price');
+
+                function handleMealChange(event) {
+                    const selectedMeal = event.target.value;
+                    foodLists.forEach(list => list.classList.remove('show'));
+                    document.getElementById(`${selectedMeal}-list`).classList.add('show');
+                    if (selectedMeal === 'breakfast') {
+                        fetchItems('Breakfast', 'breakfast-items');
+                    } else if (selectedMeal === 'lunch') {
+                        fetchItems('Lunch', 'lunch-items');
+                    } else if (selectedMeal === 'snacks') {
+                        fetchItems('Snacks', 'snacks-items');
+                    } else if (selectedMeal === 'dinner') {
+                        fetchItems('Dinner', 'dinner-items');
+                    }
+                    calculateMealTotal(selectedMeal);
+                }
+
+                function handleQuantityChange(event) {
+                    const quantity = parseInt(event.target.value) || 0;
+                    const foodItem = event.target.closest('.food-item');
+                    const priceElement = foodItem.querySelector('td:nth-child(2)');
+                    const price = priceElement ? parseFloat(priceElement.innerText.replace('₹', '')) : 0;
+                    const totalElement = foodItem.querySelector('td:nth-child(4) span');
+                    if (totalElement) {
+                        const total = quantity * price;
+                        totalElement.innerText = total.toFixed(2);
+                    }
+                    calculateMealTotal(foodItem.closest('.food-list').id.split('-')[0]);
+                }
+
+                function calculateMealTotal(selectedMeal) {
+                    let totalMealPrice = 0;
+                    const totalPriceElements = document.querySelectorAll(`#${selectedMeal}-list .total-price`);
+                    totalPriceElements.forEach(element => {
+                        totalMealPrice += parseFloat(element.innerText.replace('₹', '') || 0);
+                    });
+                    totalPriceInput.value = `₹${totalMealPrice.toFixed(2)}`;
+                }
+
+                mealRadios.forEach(radio => radio.addEventListener('change', handleMealChange));
+
+                // Live Date and Time
+                function updateDateTime() {
+                    const now = new Date();
+                    const date = now.toLocaleDateString('en-US', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+                    const time = now.toLocaleTimeString('en-US', {
+                        hour: 'numeric',
+                        minute: 'numeric',
+                        second: 'numeric',
+                        hour12: true
+                    });
+                    document.getElementById('date-time').textContent = `${date} - ${time}`;
+                }
+
+                setInterval(updateDateTime, 1000); // Update every second
+                updateDateTime(); // Initial call to display immediately
+
+                // Fetch Items from Firebase
+                function fetchItems(mealType, tableBodyId) {
+                    const mealRef = ref(db, mealType);
+                    get(mealRef)
+                        .then((snapshot) => {
+                            if (snapshot.exists()) {
+                                const mealItems = snapshot.val();
+                                const tableBody = document.getElementById(tableBodyId);
+                                if (!tableBody) {
+                                    console.error('Table body element not found:', tableBodyId);
+                                    return;
+                                }
+                                tableBody.innerHTML = ''; // Clear existing rows
+                                for (const itemId in mealItems) {
+                                    const foodItem = mealItems[itemId];
+                                    if (!foodItem || typeof foodItem !== 'object' || !('ItemName' in foodItem) || !('Rate' in foodItem)) {
+                                        console.error('Invalid data format for food item:', foodItem);
+                                        continue; // Skip this item
+                                    }
+                                    const row = document.createElement('tr');
+                                    row.classList.add('food-item');
+                                    row.innerHTML = `
+                                        <td>${foodItem.ItemName}</td>
+                                        <td>₹${(foodItem.Rate ? parseFloat(foodItem.Rate).toFixed(2) : '0.00')}</td>
+                                        <td><input type="number" class="quantity" min="0" value="0"></td>
+                                        <td>₹<span class="total-price">0.00</span></td>
+                                    `;
+                                    row.querySelector('.quantity').addEventListener('input', handleQuantityChange);
+                                    tableBody.appendChild(row);
+                                }
+                            } else {
+                                console.log('No data available for', mealType);
+                            }
+                        })
+                        .catch((error) => {
+                            console.error('Error fetching items:', error);
+                        });
+                }
+                
+            });
+        </script>
+    </div>
+</body>
+</html>
