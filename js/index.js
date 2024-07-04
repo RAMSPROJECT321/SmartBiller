@@ -25,10 +25,10 @@ function loadPage(page) {
         if (xhr.readyState == 4 && xhr.status == 200) {
             document.getElementById('index_content').innerHTML = xhr.responseText;
             setupPage(page); // Setup event listeners for dynamically loaded content
-            if(page === 'html/login.html'){
+            if(page === 'login.html'){
               document.getElementById('SignUpPage').classList.remove('iactive');
               document.getElementById('loginPage').classList.add('iactive');
-            }else if(page === 'html/SignUp.html'){
+            }else if(page === 'SignUp.html'){
               document.getElementById('loginPage').classList.remove('iactive');
               document.getElementById('SignUpPage').classList.add('iactive');
             }
@@ -36,10 +36,10 @@ function loadPage(page) {
     };
     xhr.send();
 }
-loadPage('html/login.html');
+loadPage('login.html');
 
 function setupPage(page) {
-  if(page === 'html/login.html'){
+  if(page === 'login.html'){
     let Eid=document.getElementById('empId');
     let password=document.getElementById('password');
     let submit=document.getElementById('submit');   
@@ -76,7 +76,7 @@ function setupPage(page) {
     }
     
     submit.addEventListener('click',login);
-  }else if(page === 'html/SignUp.html'){
+  }else if(page === 'SignUp.html'){
     let Ename=document.getElementById('name');
      let Eid=document.getElementById('empId');
      let Eemail=document.getElementById('email');
@@ -119,7 +119,7 @@ function setupPage(page) {
     }
 
     submitbtn.addEventListener('click',addData);
-  }else if(page === 'html/forgotPassword.html'){
+  }else if(page === 'forgotPassword.html'){
     let Eid=document.getElementById('empId');
     let submit=document.getElementById('submit'); 
 

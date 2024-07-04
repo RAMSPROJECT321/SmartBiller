@@ -33,7 +33,7 @@ function loadPage(page) {
 
 // Function to setup event listeners for dynamically loaded content
 function setupPage(page) {
-    if(page === 'html/student.html'){
+    if(page === 'student.html'){
         console.log("StudentPage");
 
         let selectedStudentId = null;
@@ -205,7 +205,7 @@ function setupPage(page) {
         // };
         loadStudents();
         
-    }else if (page === 'html/addItem.html') {
+    }else if (page === 'addItem.html') {
         const mealRadios = document.querySelectorAll('input[name="meal"]');
         const addItemBtn = document.getElementById('addItemBtn');
         const updateItemBtn = document.getElementById('updateItemBtn');
@@ -347,7 +347,7 @@ function setupPage(page) {
         // Load default data when the page loads
         const initialMealType = document.querySelector('input[name="meal"]:checked').value;
         loadData(initialMealType);
-    }else if(page === 'html/billingpage.html'){
+    }else if(page === 'billingpage.html'){
         console.log("Billing page");
     
             const mealRadios = document.querySelectorAll('input[name="meal"]');
@@ -548,7 +548,7 @@ function setupPage(page) {
 
 // Initial load
 document.addEventListener('DOMContentLoaded', () => {
-    loadPage('html/student.html'); // Load the default page
+    loadPage('student.html'); // Load the default page
 });
 
 window.loadPage = loadPage; // Export loadPage function for use in inline onclick attributes
