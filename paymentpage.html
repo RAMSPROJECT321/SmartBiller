@@ -12,8 +12,8 @@
     <div class="container">
         <h1 class="heading">PAYMENT</h1>
         <!-- Student Profile -->
-        <div class="student-profile">
-            <img src="path/to/student-photo.jpg" alt="Student Photo" id="student-photo">
+        <!-- <div class="student-profile">
+            <div><img src="path/to/student-photo.jpg" alt="Student Photo" id="student-photo"></div>
             <div class="student-info">
                 <div>
                     <label for="student-id">Student ID:</label>
@@ -24,31 +24,45 @@
                     <input type="text" id="student-name" name="student-name" readonly value="John Doe">
                 </div>
             </div>
+        </div> -->
+
+        <div class="section" style="display:flex; justify-content: space-between;">
+            <div><img src="" alt="Student Photo" id="student-photo"></div>
+            <div>
+                <label for="student-id">Student ID:</label>
+                <input type="text" id="student-id" name="student-id" placeholder="Enter Student ID">
+            </div>
+            <div>
+                <label for="student-name">Student Name:</label>
+                <input type="text" id="student-name" name="student-name" placeholder="Enter Student Name">
+            </div>
+            <div class="date-time" id="date-time"></div>
         </div>
 
         <!-- Date and Time -->
-        <div class="date-time" id="date-time"></div>
+       
 
         <!-- Total Price, Remaining Balance, and Current Balance -->
         <div class="balance-section section">
             <div>
-                <label for="total-price">Total Price:</label>
+                <label for="total-price">Bill Price:</label>
                 <input type="text" id="total-price" name="total-price" readonly value="5000">
+            </div>
+            
+            <div>
+                <label for="current-balance">Current Balance:</label>
+                <input type="text" id="current-balance" name="current-balance" readonly value="3000">
             </div>
             <div>
                 <label for="remaining-balance">Remaining Balance:</label>
                 <input type="text" id="remaining-balance" name="remaining-balance" readonly value="2000">
-            </div>
-            <div>
-                <label for="current-balance">Current Balance:</label>
-                <input type="text" id="current-balance" name="current-balance" readonly value="3000">
             </div>
         </div>
 
         <!-- Buttons -->
         <div class="buttons">
             <button onclick="loadPage('billingpage.html')">Previous</button>
-            <button onclick="loadPage('billingpage.html')">Done</button>
+            <button id="done-button" onclick="loadPage('billingpage.html')">Done</button>
         </div>
 
         <!-- JavaScript for live date and time -->

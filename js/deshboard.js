@@ -3,6 +3,7 @@ import { db } from './firebase-config.js';
 import { ref, child, get, set, update, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 
+
 // Add event listener to the navigation list (ul)
 document.querySelector('nav ul').addEventListener('click', function(event) {
     // Check if the clicked element is a link (a tag) within the navigation list
@@ -18,6 +19,7 @@ document.querySelector('nav ul').addEventListener('click', function(event) {
   });
   
 
+
 // Function to load external HTML pages into the content div
 function loadPage(page) {
     var xhr = new XMLHttpRequest();
@@ -31,10 +33,15 @@ function loadPage(page) {
     xhr.send();
 }
 
+
+
+
+var finalPrice=0;
+var studentId=0;
 // Function to setup event listeners for dynamically loaded content
 function setupPage(page) {
     if(page === 'student.html'){
-        console.log("StudentPage");
+        // console.log("StudentPage");
 
         let selectedStudentId = null;
 
@@ -42,6 +49,7 @@ function setupPage(page) {
         const studentId = document.getElementById('studentId');
         const course = document.getElementById('course');
         const balance = document.getElementById('balance');
+        const email=document.getElementById('email');
         const btnAdd = document.getElementById('addStudent');
         const btnUpdate = document.getElementById('updateStudent');
         const btnDelete = document.getElementById('deleteStudent');
@@ -65,16 +73,19 @@ function setupPage(page) {
                             const studentIdCell = document.createElement('td');
                             const courseCell = document.createElement('td');
                             const balanceCell = document.createElement('td');
+                            const emailCell = document.createElement('td');
 
                             studentNameCell.textContent = student.StudentName;
                             studentIdCell.textContent = student.StudentId;
                             courseCell.textContent = student.Course;
                             balanceCell.textContent = student.Balance;
+                            emailCell.textContent = student.Email;
 
                             row.appendChild(studentNameCell);
                             row.appendChild(studentIdCell);
                             row.appendChild(courseCell);
                             row.appendChild(balanceCell);
+                            row.appendChild(emailCell);
                             row.addEventListener('click', () => selectRow(row, student));
 
                             studentsTableBody.appendChild(row);
@@ -91,7 +102,7 @@ function setupPage(page) {
         }
 
         function addStudent() {
-            if (studentName.value.trim() === '' || studentId.value.trim() === '' || course.value.trim() === '' || balance.value.trim() === '') {
+            if (studentName.value.trim() === '' || studentId.value.trim() === '' || course.value.trim() === '' || balance.value.trim() === '' || email.value.trim() === '') {
                 alert("All fields are required.");
                 return;
             }
@@ -107,7 +118,8 @@ function setupPage(page) {
                         StudentName: studentName.value,
                         StudentId: studentIdValue,
                         Course: course.value,
-                        Balance: balance.value
+                        Balance: balance.value,
+                        Email: email.value
                     })
                     .then(() => {
                         alert("Student Added");
@@ -151,7 +163,8 @@ function setupPage(page) {
                 update(ref(db, 'Student/' + selectedStudentId), {
                     StudentName: studentName.value,
                     Course: course.value,
-                    Balance: balance.value
+                    Balance: balance.value,
+                    Email:email.value
                 })
                 .then(() => {
                     alert("Student Updated");
@@ -181,6 +194,7 @@ function setupPage(page) {
             studentId.value = student.StudentId;
             course.value = student.Course;
             balance.value = student.Balance;
+            email.value= student.Email;
 
             // Make the student ID field read-only
             studentId.setAttribute('readonly', true);
@@ -191,6 +205,7 @@ function setupPage(page) {
             studentId.value = '';
             course.value = '';
             balance.value = '';
+            email.value = '';
             studentId.removeAttribute('readonly'); // Make student ID editable again
         }
 
@@ -348,12 +363,21 @@ function setupPage(page) {
         const initialMealType = document.querySelector('input[name="meal"]:checked').value;
         loadData(initialMealType);
     }else if(page === 'billingpage.html'){
-        console.log("Billing page");
+        // console.log("Billing page");
     
             const mealRadios = document.querySelectorAll('input[name="meal"]');
             const foodLists = document.querySelectorAll('.food-list');
-            const totalPriceInput = document.getElementById('total-price');
+            const totalPrice = document.getElementById('total-price');
+            const studentIdInput= document.getElementById('student-id');
+            const nextButton=document.getElementById('next-button');
 
+            function setvalues(){
+                studentId=studentIdInput.value;
+                // console.log(studentId);
+            }
+
+            nextButton.addEventListener('click',setvalues);
+            
             document.getElementById('breakfast-list').classList.add('show');
             fetchBreakfastItems();
             function handleMealChange(event) {
@@ -387,7 +411,9 @@ function setupPage(page) {
                 totalPriceElements.forEach(element => {
                     totalMealPrice += parseFloat(element.innerText.replace('₹', ''));
                 });
-                totalPriceInput.value = `₹${totalMealPrice.toFixed(2)}`;
+                // totalPriceInput.value = `₹${totalMealPrice.toFixed(2)}`;
+                totalPrice.innerHTML = `₹${totalMealPrice.toFixed(2)}`;
+                finalPrice = totalMealPrice;
             }
 
             mealRadios.forEach(radio => radio.addEventListener('change', handleMealChange));
@@ -540,11 +566,129 @@ function setupPage(page) {
             // handleQuantityChange('Breakfast');
             // fetchBreakfastItems();
             // calculateMealTotal(selectedMeal);
+    }else if(page === 'paymentpage.html'){
+        // Payment Page
+        // console.log(finalPrice);
+        // console.log(studentId);
+
+        const totalMealPriceInput=document.getElementById("total-price");
+        const studentIdInput = document.getElementById('student-id');
+        const studentNameInput = document.getElementById('student-name');
+        const current_balance = document.getElementById('current-balance');
+        const remaining_balance = document.getElementById('remaining-balance');
+        const submitButton=document.getElementById('done-button');
+
+        // function sendMessage(){
+
+        // }
+
+        // submitButton.addEventListener('click',sendMessage);
+
+
+        (function(){
+            emailjs.init("IG2yiqWemCzCaJU3k"); // Replace 'YOUR_USER_ID' with your EmailJS user ID
+
+            submitButton.addEventListener('click', function(event) {
+
+                const dbRef = ref(db);
+
+               get(child(dbRef,'Student/' + studentId)).then((snapshot)=>{
+                    if(snapshot.exists()){
+                         const data=snapshot.val();
+
+                         const storedEmail = String(data.Email);
+                         const storedName = String(data.StudentName);
+                         const current_balance=String(data.Balance);
+                         const remaining_balance=current_balance-finalPrice;
+                         const courseName=String(data.Course);
+
+                         if(true){
+                              event.preventDefault();
+                              // Collect user inputs
+                              //const userName = document.getElementById('user-name').value.trim();
+                              const userName = 'RAMS Group';
+                              // Prepare email parameters
+                              const emailParams = {
+                                  from_name: userName,
+                                  to_name: 'Recipient_0111', // Change to the recipient's name if needed
+                                  //message_html: message,
+                                  reply_to: storedEmail,
+                                  student_Name: storedName,
+                                  student_Id:studentId,
+                                  billAmount:finalPrice,
+                                  currentBalance:current_balance,
+                                  remaining_Balance:remaining_balance
+                              };
+              
+                              // Send email
+                              emailjs.send('service_nyl10wr', 'template_ly8mobp', emailParams)
+                                  .then(function(response) {
+                                    //   console.log('Email sent:', response);
+                                      alert('Email sent successfully!');
+                                    
+                                    update(ref(db, 'Student/' + studentId), {
+                                        StudentName: storedName,
+                                        Course: courseName,
+                                        Balance: remaining_balance,
+                                        Email:storedEmail
+                                    })
+                                    .then(() => {
+                                        alert("Student Updated");
+                                    })
+                                    .catch((error) => {
+                                        console.error("Error updating student: ", error);
+                                    });
+                                  }, function(error) {
+                                      console.error('Error sending email:', error);
+                                      alert('Failed to send email. Please try again later.');
+                                  });
+                             }
+                    }else{
+                         alert("Student Not Exits");
+                    }
+                    
+               })
+               .catch((error)=>{
+                    alert("Unsuccessful");
+               })
+            });
+        })();
+
+
+
+        totalMealPriceInput.value=`₹${finalPrice}`;
+        studentIdInput.value=studentId;
+
+        if(studentId !== ""){
+            const dbRef = ref(db);
+    
+            get(child(dbRef,'Student/' + studentId)).then((snapshot)=>{
+                if(snapshot.exists()){
+                    const data=snapshot.val();
+        
+                    const totalBalance = String(data.Balance); 
+                    const student_name=String(data.StudentName);
+                    current_balance.value=`₹${totalBalance}`;
+                    remaining_balance.value=`₹${totalBalance-finalPrice}`;
+                    studentNameInput.value=student_name;
+                    console.log(totalBalance);
+                }else{
+                    alert("Student Not Exits");
+                }
+                
+            })
+            .catch((error)=>{
+                alert("Unsuccessful");
+            })
+        }
+
     } else {
         // Handle other pages if needed
-        console.log('Setup for other pages');
+        // console.log('Setup for other pages');
     }
 }
+
+
 
 // Initial load
 document.addEventListener('DOMContentLoaded', () => {

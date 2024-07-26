@@ -3,9 +3,9 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #333;
-    color: #333; /* Set a default text color for readability */
-    -webkit-text-fill-color: white;
+    /* background-color: #333; */
+    /* color: #333; Set a default text color for readability */
+    /* -webkit-text-fill-color: white; */
 }
 
 .container {
@@ -13,6 +13,7 @@ body {
     margin: 0 auto;
     padding: 20px;
 }
+
 
 h1, h2, p {
     margin: 0;
@@ -34,7 +35,7 @@ p {
 
 /* Header styles */
 .header {
-    background-color: #333;
+    /* background-color: #333; */
     color: #fff; /* Light text for dark background */
     padding: 15px 0;
 }
@@ -68,8 +69,14 @@ p {
 
 /* Main section styles */
 .main {
+    /* min-height: 500px;   */
+    height: 70vh;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* border-radius: 8px; */
+    overflow: hidden;
     padding-top: 10px; /* Add vertical spacing */
-    background-color: #333;
+    /* background-color: #333; */
+    -webkit-text-fill-color: rgb(0, 0, 0);
 }
 
 .about-us{
@@ -114,11 +121,11 @@ p {
     background-color: #ffffff;
     color: #000000;
     -webkit-text-fill-color: black;
-    padding: 10px 0;
+    /* padding: 10px 0; */
     text-align: center;
 }
 
 .footer p {
-    font-size: 0.8em;
+    font-size: 1em;
     margin-bottom: 0;
 }

@@ -88,23 +88,23 @@ h1{
 hr {
     border: 0;
     border-top: 1.5px solid #000000;
-    margin: 20px 0;
+    margin: 10px 0; 
     /* width: 2px; */
     /* height: 2px; */
 }
 
 .add-item h2 {
     margin-bottom: 10px;
-    margin: 0px;
+    /* margin: 0px; */
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
 }
 
 .form-group input {
@@ -117,6 +117,7 @@ button {
     padding: 10px 15px;
     background-color: #0000ff;
     margin-right: 5px;
+    margin-top: 10px;
     color: #fff;
     border: none;
     border-radius: 5px;

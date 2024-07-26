@@ -10,12 +10,14 @@
 
 <body>
     <div class="container">
-        <h1>BILLING</h1>
+        <div class="container_02">
+        <!-- <h1>BILLING</h1> -->
         <!-- Date and Time -->
-        <div class="date-time" id="date-time"></div>
+        
 
         <!-- Student Info -->
-        <div class="section" style="display: flex; justify-content: space-between;">
+        <div class="section" style="display:flex; justify-content: space-between;">
+           
             <div>
                 <label for="student-id">Student ID:</label>
                 <input type="text" id="student-id" name="student-id" placeholder="Enter Student ID">
@@ -24,6 +26,7 @@
                 <label for="student-name">Student Name:</label>
                 <input type="text" id="student-name" name="student-name" placeholder="Enter Student Name">
             </div>
+            <div class="date-time" id="date-time"></div>
         </div>
 
         <!-- Radio Buttons for Meals -->
@@ -107,14 +110,16 @@
         <!-- Total Price and Remaining Balance -->  
         <div class="section total-section">
             <label for="total-price">Total Price:</label>
-            <input type="text" id="total-price" name="total-price" readonly value="0">
+            <span id="total-price" name="total-price">₹0.00</span>
+            <!-- <input type="text" id="total-price" name="total-price" readonly value="0"> -->
         </div>
         <!-- Next and Previous Buttons -->
         <div class="section_01">
-            <button id="prev-button" onclick="loadPage('payment.html')">Previous</button>
+            <button id="prev-button" >Previous</button>
             <button id="next-button" onclick="loadPage('paymentpage.html')">Next</button>
         </div>
     </div>
+</div>
 </body>
 
 </html>
