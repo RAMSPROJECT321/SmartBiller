@@ -3,9 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
-    <title>Document</title>
+    <title>DashBoard</title>
+    <link rel="stylesheet" href="css/deshBoard.css"> 
 </head>
 <body>
-    <h1>DashBoard</h1>
+  <div class="full_content">
+    <nav>
+        <label class="logo">SMART BILLER</label>
+        <!-- <nav class="nav nav-tabs">
+            <a class="nav-link active" onclick="loadPage('student.html')">Student</a>
+            <a class="nav-link" onclick="loadPage('addItem.html')">Add Item</a>
+            <a class="nav-link" onclick="loadPage('billingpage.html')">Billing</a>
+        </nav> -->
+        <ul>
+            <li><a class="nav active"  onclick="loadPage('student.html')">Student</a></li>
+            <li><a class="nav" onclick="loadPage('addItem.html')">Add_Item</a></li>
+            <li><a class="nav" onclick="loadPage('billingpage.html')">Billing</a></li>
+            <li><a class="nav" onclick="loadPage('about.html')">About</a></li>
+        </ul>
+    </nav>
+    <div id="content"></div>
+</div>
+<script type="module" src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+<script type="module" src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js"></script>
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/deshboard.js"></script>
 </body>
 </html>

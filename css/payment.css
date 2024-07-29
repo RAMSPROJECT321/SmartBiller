@@ -1,0 +1,171 @@
+body {
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* height: 100vh; */
+}
+
+/* .container {
+    background-color: #c7d0f0;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 70%;
+    position: relative;
+} */
+.container {
+    /* display: flex; */
+    /* max-width: 100%; */
+    min-height: 500px;
+    height: 85vh;
+    /* margin: 5px 5px; */
+    padding: 20px;
+    /* background-color: #e7e7e7; */
+    /* background-color: #c7d0f0; */
+    background-color: #ebe9e3;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.heading{
+    
+    text-align: center;
+    /* margin: 15px; */
+    font-size: 2.5em;
+    color: #000000;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    /* margin-bottom: 5px; */
+    margin: 15px;
+    display: inline-block;
+    /* width: 150px; */
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    padding: 3px;
+    /* margin-bottom: 10px; */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+    width: 50%;
+}
+
+input[type="text"][readonly] {
+    background-color: #f0f0f0;
+}
+
+/* Date and Time */
+.date-time {
+    /* position: absolute; */
+    top: 20px;
+    right: 20px;
+    font-size: 1    em;
+    color: #333;
+    margin-top: 18px;
+    /* border: 3px solid #000000; */
+    /* border-bottom: 2px solid rgb(0, 0, 0); */
+    /* border-radius: 10px; */
+    /* padding: 5px; */
+    /* align-items: center; */
+    animation: fadeInOut 1s infinite alternate;
+    transition: color 0.3s ease;
+}
+
+.section {
+    /* margin-bottom: 20px; */
+}
+
+/* Student Profile */
+.student-profile {
+    display: flex;
+    align-items: center;
+    /* margin-bottom: 20px; */
+}
+
+.student-profile img {
+    border-radius: 10px;
+    margin-right: 20px;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.student-info {
+    display: flex;
+    /* align-items: center; */
+    /* justify-content: space-between; */
+    /* flex-direction: column; */
+}
+
+.student-info div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.student-info label {
+    width: auto;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.student-info input {
+    width: 200px; 
+    display: inline-block;
+    padding: 3px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+/* Centering the Balance Section */
+.balance-section {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center;     */
+    justify-content: center;
+}
+
+.balance-section div {
+    /* display: flex; */
+    /* justify-content: center; */
+    /* margin-bottom: 10px; */
+}
+
+/* Buttons */
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.buttons button {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: white;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.buttons button:hover {
+    background-color: #0056b3;
+}           
