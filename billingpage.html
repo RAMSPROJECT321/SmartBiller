@@ -11,115 +11,151 @@
 <body>
     <div class="container">
         <div class="container_02">
-        <!-- <h1>BILLING</h1> -->
-        <!-- Date and Time -->
-        
+            <!-- <h1>BILLING</h1> -->
+            <!-- Date and Time -->
 
-        <!-- Student Info -->
-        <div class="section" style="display:flex; justify-content: space-between;">
-           
-            <div>
-                <label for="student-id">Student ID:</label>
-                <input type="text" id="student-id" name="student-id" placeholder="Enter Student ID">
-            </div>
-            <div>
-                <label for="student-name">Student Name:</label>
-                <input type="text" id="student-name" name="student-name" placeholder="Enter Student Name">
-            </div>
-            <div class="date-time" id="date-time"></div>
-        </div>
-
-        <!-- Radio Buttons for Meals -->
-        <div class="section">
-            <div class="radio-buttons">
-                <label><input type="radio" name="meal" value="breakfast" checked> Breakfast</label>
-                <label><input type="radio" name="meal" value="lunch"> Lunch</label>
-                <label><input type="radio" name="meal" value="snacks"> Snacks</label>
-                <label><input type="radio" name="meal" value="dinner"> Dinner</label>
-            </div>
-
-            <!-- Food Lists -->
-            <div class="food-list" id="breakfast-list">
-                <table style="border: black;">
-                    <thead>
-                        <tr>
-                            <th>Food</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody id="breakfast-items">
-                        <!-- Breakfast items will be populated here -->
-                    </tbody>
-                </table>
+            <div id="popup" class="popup">
+                <div class="popup-content">
+                    <span class="close">&times;</span>
+                    <h2>
+                        <center>Face Detection</center>
+                    </h2>
+                    <!-- <p>This is a simple popup example.</p> -->
+                    <div style="margin-top:10px; width:100%; height:90%; display:flex; ">
+                        <div style="margin-top:10px; width:55%; height:100%">
+                            <div style="width:100%; height:85%">
+                                <img id="video" style="border: 2px solid black; width:100%; height:100%;"
+                                    src="image/gif_loading.gif">
+                            </div>
+                            <div style="margin-top:10px; width: 100%;  display:flex; justify-content: space-between;">
+                                <button id="recognizeButton">Recognize</button>
+                                <button id="closeButton" class="closeButton">Close</button>
+                            </div>
+                        </div>
+                        <div style="margin-top:10px; margin-left:10px; padding:10px; width:42%; height:80%;  ">
+                            <div>
+                                <h2 style="padding: 10px;">Recognized Students</h2>
+                                <div id="showDetected" style="display: none;">
+                                    <h3>Student Detected:</h3>
+                                    <div style="display: flex;  justify-content: space-between;">
+                                    <p style="padding: 10px;" id="result"></p>
+                                    <button id="SelectButton">Select</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Lunch Food List -->
-            <div class="food-list" id="lunch-list">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Food</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody id="lunch-items">
-                        <!-- Lunch items will be populated here -->
-                    </tbody>
-                </table>
+
+            <!-- Student Info -->
+            <div class="section" style="display:flex; justify-content: space-between;">
+
+                <div>
+                    <label for="student-id">Student ID:</label>
+                    <input type="text" id="student-id" name="student-id" placeholder="Enter Student ID">
+                </div>
+                <!-- <div>
+                    <label for="student-name">Student Name:</label>
+                    <input type="text" id="student-name" name="student-name" placeholder="Enter Student Name">
+                </div> -->
+                <button id="openPopup">Start Face Detection</button>
+                <div class="date-time" id="date-time"></div>
             </div>
 
-            <!-- Snacks Food List -->
-            <div class="food-list" id="snacks-list">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Food</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody id="snacks-items">
-                        <!-- Snacks items will be populated here -->
-                    </tbody>
-                </table>
+            <!-- Radio Buttons for Meals -->
+            <div class="section">
+                <div class="radio-buttons">
+                    <label><input type="radio" name="meal" value="breakfast" checked> Breakfast</label>
+                    <label><input type="radio" name="meal" value="lunch"> Lunch</label>
+                    <label><input type="radio" name="meal" value="snacks"> Snacks</label>
+                    <label><input type="radio" name="meal" value="dinner"> Dinner</label>
+                </div>
+
+                <!-- Food Lists -->
+                <div class="food-list" id="breakfast-list">
+                    <table style="border: black;">
+                        <thead>
+                            <tr>
+                                <th>Food</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="breakfast-items">
+                            <!-- Breakfast items will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Lunch Food List -->
+                <div class="food-list" id="lunch-list">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Food</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lunch-items">
+                            <!-- Lunch items will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Snacks Food List -->
+                <div class="food-list" id="snacks-list">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Food</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="snacks-items">
+                            <!-- Snacks items will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Dinner Food List -->
+                <div class="food-list" id="dinner-list">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Food</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dinner-items">
+                            <!-- Dinner items will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
-            <!-- Dinner Food List -->
-            <div class="food-list" id="dinner-list">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Food</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody id="dinner-items">
-                        <!-- Dinner items will be populated here -->
-                    </tbody>
-                </table>
+            <!-- Total Price and Remaining Balance -->
+            <div class="section total-section">
+                <label for="total-price">Total Price:</label>
+                <span id="total-price" name="total-price">₹0.00</span>
+                <!-- <input type="text" id="total-price" name="total-price" readonly value="0"> -->
             </div>
-        </div>
-
-        <!-- Total Price and Remaining Balance -->  
-        <div class="section total-section">
-            <label for="total-price">Total Price:</label>
-            <span id="total-price" name="total-price">₹0.00</span>
-            <!-- <input type="text" id="total-price" name="total-price" readonly value="0"> -->
-        </div>
-        <!-- Next and Previous Buttons -->
-        <div class="section_01">
-            <button id="prev-button" >Previous</button>
-            <button id="next-button" onclick="loadPage('paymentpage.html')">Next</button>
+            <!-- Next and Previous Buttons -->
+            <div class="section_01">
+                <button id="prev-button">Previous</button>
+                <button id="next-button" >Next</button>
+                <!-- onclick="loadPage('paymentpage.html')" -->
+            </div>
         </div>
     </div>
-</div>
 </body>
 
 </html>

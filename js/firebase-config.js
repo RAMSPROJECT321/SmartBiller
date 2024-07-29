@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getDatabase } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
 const firebaseConfig = {
     apiKey: "AIzaSyDydurEKNLQIYsgenH29sWXJEgKCvdY-js",
     authDomain: "ramsproject321-75e29.firebaseapp.com",
@@ -11,9 +12,8 @@ const firebaseConfig = {
     measurementId: "G-0254C2WB44"
   };
 
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-export { app, db };
+export { firebaseConfig, app , db };

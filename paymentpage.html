@@ -10,7 +10,11 @@
 
 <body background="https://jooinn.com/images/blur-restaurant-3.png">
     <div class="container">
-        <h1 class="heading">PAYMENT</h1>
+        <div style="display:flex; justify-content:space-between">
+            <h1 style="padding-left:10px;" class="heading">Payment Page</h1>
+            <div style="float: right;" class="date-time" id="date-time"></div>
+        </div>
+        <hr>
         <!-- Student Profile -->
         <!-- <div class="student-profile">
             <div><img src="path/to/student-photo.jpg" alt="Student Photo" id="student-photo"></div>
@@ -26,38 +30,42 @@
             </div>
         </div> -->
 
-        <div class="section" style="display:flex; justify-content: space-between;">
-            <div><img src="" alt="Student Photo" id="student-photo"></div>
+        <div class="section" style="margin-top:10px; display:flex; justify-content:center;">
             <div>
-                <label for="student-id">Student ID:</label>
-                <input type="text" id="student-id" name="student-id" placeholder="Enter Student ID">
+                <img src="" style="margin-left: 20px;" height="200px" width="200px" alt="Student Photo" id="student-photo">
+                <div>
+                    <label for="student-id">Student ID:</label>
+                    <input type="text" id="student-id" name="student-id" placeholder="Enter Student ID" disabled>
+                </div>
+                <div>
+                    <label for="student-name">Student Name:</label>
+                    <input type="text" id="student-name" name="student-name" placeholder="Enter Student Name" disabled>
+                </div>
             </div>
-            <div>
-                <label for="student-name">Student Name:</label>
-                <input type="text" id="student-name" name="student-name" placeholder="Enter Student Name">
+            <!-- <div style="border-left:2px solid black; border-right:2px solid black;">
+            </div> -->
+            <div class="balance-section section" style="border-left:2px solid black;">
+                <div>
+                    <label for="total-price">Bill Price:</label>
+                    <input type="text" id="total-price" name="total-price" readonly value="5000">
+                </div>
+    
+                <div>
+                    <label for="current-balance">Current Balance:</label>
+                    <input type="text" id="current-balance" name="current-balance" readonly value="3000">
+                </div>
+                <div>
+                    <label for="remaining-balance">Remaining Balance:</label>
+                    <input type="text" id="remaining-balance" name="remaining-balance" readonly value="2000">
+                </div>
             </div>
-            <div class="date-time" id="date-time"></div>
         </div>
 
         <!-- Date and Time -->
-       
+
 
         <!-- Total Price, Remaining Balance, and Current Balance -->
-        <div class="balance-section section">
-            <div>
-                <label for="total-price">Bill Price:</label>
-                <input type="text" id="total-price" name="total-price" readonly value="5000">
-            </div>
-            
-            <div>
-                <label for="current-balance">Current Balance:</label>
-                <input type="text" id="current-balance" name="current-balance" readonly value="3000">
-            </div>
-            <div>
-                <label for="remaining-balance">Remaining Balance:</label>
-                <input type="text" id="remaining-balance" name="remaining-balance" readonly value="2000">
-            </div>
-        </div>
+
 
         <!-- Buttons -->
         <div class="buttons">
