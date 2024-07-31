@@ -80,7 +80,7 @@ function setupPage(page) {
 
         function startCamera() {
             isCameraOn = true;
-            cameraFeed.src = 'image/gif_loading.gif';
+            cameraFeed.src = 'image/Loading_Camera.gif';
             fetch('http://127.0.0.1:5000/start_camera')
                 .then(response => response.text())
                 .then(data => {
@@ -544,7 +544,7 @@ function setupPage(page) {
 
 
         function startCamera() {
-            video.src = 'image/gif_loading.gif';
+            video.src = 'image/Loading_Camera.gif';
             fetch('http://127.0.0.1:5000/start_camera')
                 .then(response => response.text())
                 .then(data => {
@@ -580,7 +580,17 @@ function setupPage(page) {
         nextButton.addEventListener('click', function(){
             setvalues();
             if(studentId !== ""){
-                loadPage('paymentpage.html');
+                const dbRef = ref(db, 'Student/' + studentId);
+
+                    get(dbRef).then((snapshot) => {
+                        if (snapshot.exists()) {
+                            loadPage('paymentpage.html');
+                        }else{
+                            alert("Student with this ID Not exists");
+                        }
+                    }).catch((error) => {
+                        console.error("Error checking student ID: ", error);
+                    });
             }else{
                 alert("Student Id Not Selected.");
             }

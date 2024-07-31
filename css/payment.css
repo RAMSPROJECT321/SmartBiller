@@ -18,11 +18,8 @@ body {
     position: relative;
 } */
 .container {
-    /* display: flex; */
-    /* max-width: 100%; */
-    min-height: 500px;
-    height: 85vh;
-    /* margin: 5px 5px; */
+    /* min-height: 500px; */
+    /* height: 85vh; */
     padding: 20px;
     /* background-color: #e7e7e7; */
     /* background-color: #c7d0f0; */
