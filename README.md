@@ -58,6 +58,9 @@ Here are some screenshots of the SMART-BILLER application:
 ### 4. Add Item
 ![Add Item](output4.png)
 
+### 4. Billing
+![Billing](billing_gif.gif)
+
 ## Contributing
 If you'd like to contribute to SMART-BILLER, please fork the repository and submit a pull request. We welcome all contributions!
 
