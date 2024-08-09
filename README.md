@@ -10,8 +10,8 @@ SMART-BILLER is an innovative system designed to streamline the management of st
 - **Instant Notifications**: Sends immediate notifications to students about their account status.
 
 ## Technology Stack
-- **Frontend**: HTML, CSS, JavaScript
-- **Backend**: Python, Firebase
+- **Frontend**: HTML, CSS, JavaScript,XML
+- **Backend**: Python
 - **Database**: Firebase
 
 ## Installation and Setup
