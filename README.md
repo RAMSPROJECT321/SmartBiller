@@ -3,6 +3,8 @@
 ## Project Overview
 SMART-BILLER is an innovative system designed to streamline the management of student accounts using facial recognition technology. The system identifies students and automatically retrieves their profiles, enabling efficient and accurate updates. Administrators can edit account balances, and the system sends instant notifications regarding the account status.
 
+The site is hosted on Vercel and can be accessed at [SMART BILLER](https://smart-biller.vercel.app/).
+
 ## Features
 - **Facial Recognition**: Identifies students using facial recognition and retrieves their profiles automatically.
 - **Profile Management**: Allows updating of student profiles with ease.
