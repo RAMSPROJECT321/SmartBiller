@@ -118,3 +118,15 @@ body {
 .signup-link_01 a:hover {
     color: #0000FF;
 }
+
+.password-container {
+    position: relative;
+}
+
+.password-container .fa-eye, 
+.password-container .fa-eye-slash {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}

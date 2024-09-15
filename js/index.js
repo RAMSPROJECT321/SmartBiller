@@ -74,7 +74,18 @@ function setupPage(page) {
             alert("Unsuccessful");
         })
     }
-    
+    const togglePasswordIcon = document.getElementById('togglePasswordIcon');
+        const passwordField = document.getElementById('password');
+
+        togglePasswordIcon.addEventListener('click', function () {
+            // Toggle the type attribute between "password" and "text"
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            
+            // Toggle between eye and eye-slash icon
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
     submit.addEventListener('click',login);
   }else if(page === 'SignUp.html'){
     let Ename=document.getElementById('name');
@@ -117,6 +128,21 @@ function setupPage(page) {
               alert("Fill all data");
         }
     }
+
+    //For Password Icon
+    const togglePasswordIcon = document.getElementById('togglePasswordIcon');
+        const passwordField = document.getElementById('password');
+
+        togglePasswordIcon.addEventListener('click', function () {
+            // Toggle the type attribute between "password" and "text"
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            
+            // Toggle between eye and eye-slash icon
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+
 
     submitbtn.addEventListener('click',addData);
   }else if(page === 'forgotPassword.html'){

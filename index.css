@@ -13,48 +13,6 @@ body {
     background-color: #ebe9e3; /* White for background */
 }
 
-/* header {
-    
-    background-color: #34495e; 
-    color: #fff; 
-    padding: 20px 0;
-}
-*/
-
-/*
-h1, h2 {
-    margin: 0;
-    padding: 0;
-}
-
-h1 {
-    font-size: 2.5em;
-}
-
-h2 {
-    font-size: 1.5em;
-    margin-bottom: 15px;
-}
-
-nav {
-    float: right;
-}
-
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-nav li {
-    display: inline-block;
-    margin-left: 15px;
-}
-
-nav a {
-    text-decoration: none;
-    color: #fff; 
-} */
 
 main {
     /* padding: 60px 0; */
@@ -90,13 +48,13 @@ footer p {
 
 
 nav{
-    height: 80px;
+    height: 8   0px;
     width: 100%;
     background: #34495e;
     border-bottom: 3px solid rgb(0, 0, 0);
     /* box-shadow: 0 2px 4px 0 rgba(0, 4, 255, 0.3); */
 }
-
+                                                                                    
 label.logo{
     cursor: pointer;
     font-size: 35px;
