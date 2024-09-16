@@ -74,6 +74,8 @@ function setupPage(page) {
             alert("Unsuccessful");
         })
     }
+
+    //For Password Icon
     const togglePasswordIcon = document.getElementById('togglePasswordIcon');
         const passwordField = document.getElementById('password');
 
